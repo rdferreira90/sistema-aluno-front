@@ -1,9 +1,12 @@
 import './App.css';
 import userImage from './images/do-utilizador.png';
+import logo from './images/logo-vida-relevante.png';
+
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <img src={logo} className="App-logo" alt="Logo" />
         <div className="Login-area">
           <img src={userImage} className="User-img" alt="Imagem de usuário" />
           <p>Faça seu login:</p>

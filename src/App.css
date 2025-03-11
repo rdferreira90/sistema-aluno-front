@@ -3,15 +3,11 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
+  width: 65vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #262f74;
@@ -76,7 +72,7 @@ p {
   padding: 15px;
   font-size: 18px;
   color: white;
-  background-color: #D86700;
+  background-color: #ef8451;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -84,7 +80,7 @@ p {
 }
 
 .login-button:hover {
-  background-color: #DF5800;
+  background-color: #ed733a;
 }
 
 .login-button:active {
