@@ -6,7 +6,7 @@ import { Layout } from "../layouts/Layout";
 import StudentsPage from "../pages/students/Student";
 import TeachersPage from "../pages/teacher/Teacher";
 import SubjectsPage from "../pages/subject/Subject";
-import SubjectDetailPage from '../pages/dashboard/SubjectDetail';
+import SubjectDetailPage from '../pages/subject/SubjectDetail';
 
 export function AppRoutes() {
   return (
