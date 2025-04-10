@@ -2,16 +2,18 @@
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { login } from '../../api/auth';
+import {login} from '../../api/auth';
 import { LoginCredentials } from '../../types/user';
 import userImage from '../../assets/images/do-utilizador.png';
 import logo from '../../assets/images/logo-vida-relevante.png';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const AuthContext = useAuth();
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -21,9 +23,8 @@ export function LoginPage() {
 
     try {
       const credentials: LoginCredentials = { username, password };
-      const { token, user } = await login(credentials);
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      const { token, user } = await login(credentials);      
+      AuthContext.login(user, token);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Erro ao fazer login');

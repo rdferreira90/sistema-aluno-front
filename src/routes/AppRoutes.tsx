@@ -12,6 +12,7 @@ export function AppRoutes() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
 
         <Route element={<ProtectedRoute />}>

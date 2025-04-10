@@ -9,6 +9,7 @@ import { Download } from 'lucide-react';
 import { FileUploader } from '../../components/FileUploader';
 import { useLoading } from '../../contexts/LoadingContext';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../contexts/AuthContext';
 
 
 export default function SubjectDetailPage() {
@@ -16,6 +17,8 @@ export default function SubjectDetailPage() {
     const [subject, setSubject] = useState<Subject | null>(null);
     const [files, setFiles] = useState<IFile[]>([]);
     const { showLoading, hideLoading } = useLoading();
+    const { hasPermission } = useAuth();
+
 
     useEffect(() => {
         async function fetchSubjectAndFiles() {
@@ -86,7 +89,7 @@ export default function SubjectDetailPage() {
                 </p>
             )}
 
-            <FileUploader onUpload={handleUpload} />
+            {hasPermission('upload_file') && (<FileUploader onUpload={handleUpload} />)}
 
             <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-2">Arquivos para download</h3>
@@ -105,12 +108,14 @@ export default function SubjectDetailPage() {
                                         Enviado em: {new Date(file.updated_at).toLocaleDateString()}
                                     </p>
                                 </div>
+                                {hasPermission('download_file') && (
                                 <button
                                     onClick={() => handleDownload(file.id, file.name)}
                                     className="flex items-center gap-1 text-blue-600 hover:underline"
                                 >
                                     <Download size={18} /> Baixar
                                 </button>
+                                )}
                             </li>
                         ))}
                     </ul>
