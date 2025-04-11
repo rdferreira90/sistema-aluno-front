@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSubjectById } from '../../api/subject';
+import { getSubjectById } from '../../api/subjectService';
 import { Subject } from '../../types/subject';
-import { getByCourseSubject, downloadFile, uploadFile } from '../../api/file';
+import { getByCourseSubject, downloadFile, uploadFile } from '../../api/fileService';
 import { IFile } from '../../types/file';
 import { Download } from 'lucide-react';
 import { FileUploader } from '../../components/FileUploader';

@@ -141,7 +141,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { ChevronDown, ChevronRight, Menu } from 'lucide-react';
 import { getLucideIcon } from '../utils/getLucideIcon';
-import { MENU_ITEMS, MenuItem } from '../types/menuItem';
+import { MenuItem } from '../types/menuItem';
 import { useAuth } from '../contexts/AuthContext';
 import { buildMenu } from '@/utils/buildMenu';
 

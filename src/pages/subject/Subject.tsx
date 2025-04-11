@@ -1,4 +1,4 @@
-import { getAllSubjects } from "@/api/subject";
+import { getAllSubjects } from "@/api/subjectService";
 import { Subject } from "@/types/subject";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
