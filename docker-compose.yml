@@ -1,0 +1,24 @@
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /pibsas
+    container_name: pibsas_api_front
+    restart: unless-stopped
+    ports:
+      - $HOST_PORT:$NODE_PORT
+    stdin_open: true
+    tty: true
+    #command: bash
+    volumes:
+      - .:/pibsas
+    #networks:
+    #  - net_pibsas
+
+# networks:
+#  net_pibsas:
+#    external: true 
+
+
+    
