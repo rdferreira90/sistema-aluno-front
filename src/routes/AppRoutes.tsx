@@ -11,6 +11,13 @@ import PermissionListPage from "@/pages/permissions/PermissionList";
 import PermissionFormPage from "@/pages/permissions/PermissionForm";
 import ProfileListPage from "@/pages/profile/ProfileList";
 import ProfileFormPage from "@/pages/profile/ProfileForm";
+import { SelectUnitPage } from "@/pages/login/SelectUnitPage";
+import UserListPage from "@/pages/user/UserList";
+import UserFormPage from "@/pages/user/UserForm";
+import SubjectListPage from "@/pages/subject/SubjectList";
+import SubjectFormPage from "@/pages/subject/SubjectForm";
+import CourseListPage from "@/pages/course/CourseList";
+import CourseFormPage from "@/pages/course/CourseForm";
 
 export function AppRoutes() {
   return (
@@ -18,6 +25,7 @@ export function AppRoutes() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/select-unit" element={<SelectUnitPage />} />
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
@@ -30,6 +38,16 @@ export function AppRoutes() {
             <Route path="/permissions/new" element={<PermissionFormPage />} />
             <Route path="/profiles" element={<ProfileListPage />} />
             <Route path="/profiles/new" element={<ProfileFormPage />} />
+            <Route path="/profiles/:id" element={<ProfileFormPage />} />
+            <Route path="/users" element={<UserListPage />} />
+            <Route path="/users/new" element={<UserFormPage />} />
+            <Route path="/users/edit" element={<UserFormPage />} />
+            <Route path="/subjects" element={<SubjectListPage />} />
+            <Route path="/subjects/new" element={<SubjectFormPage />} />
+            <Route path="/subjects/:id" element={<SubjectFormPage />} />
+            <Route path="/course" element={<CourseListPage />} />
+            <Route path="/course/new" element={<CourseFormPage />} />
+            <Route path="/course/:id" element={<CourseFormPage />} />
           </Route>
         </Route>
       </Routes>

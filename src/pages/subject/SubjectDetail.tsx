@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSubjectById } from '../../api/subjectService';
-import { Subject } from '../../types/subject';
+import { Subject, SubjectsCardProps } from '../../types/subject';
 import { getByCourseSubject, downloadFile, uploadFile } from '../../api/fileService';
 import { IFile } from '../../types/file';
 import { Download } from 'lucide-react';
@@ -14,7 +14,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 export default function SubjectDetailPage() {
     const { id } = useParams<{ id: string }>();
-    const [subject, setSubject] = useState<Subject | null>(null);
+    const [subject, setSubject] = useState<SubjectsCardProps | null>(null);
     const [files, setFiles] = useState<IFile[]>([]);
     const { showLoading, hideLoading } = useLoading();
     const { hasPermission } = useAuth();
@@ -24,7 +24,7 @@ export default function SubjectDetailPage() {
         async function fetchSubjectAndFiles() {
             if (id) {
                 const data = await getSubjectById(Number(id));
-                setSubject(data);
+                // setSubject(data);
 
                 const fileList = await getByCourseSubject(Number(id));
                 setFiles(fileList);
@@ -89,7 +89,7 @@ export default function SubjectDetailPage() {
                 </p>
             )}
 
-            {hasPermission('upload_file') && (<FileUploader onUpload={handleUpload} />)}
+            {hasPermission('manage_files') && (<FileUploader onUpload={handleUpload} />)}
 
             <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-2">Arquivos para download</h3>
@@ -108,7 +108,7 @@ export default function SubjectDetailPage() {
                                         Enviado em: {new Date(file.updated_at).toLocaleDateString()}
                                     </p>
                                 </div>
-                                {hasPermission('download_file') && (
+                                {hasPermission('manage_files') && (
                                 <button
                                     onClick={() => handleDownload(file.id, file.name)}
                                     className="flex items-center gap-1 text-blue-600 hover:underline"

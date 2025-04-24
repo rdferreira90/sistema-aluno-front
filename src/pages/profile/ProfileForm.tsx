@@ -10,6 +10,8 @@ interface Permission {
 }
 
 export default function ProfileFormPage() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { id } = useParams();
   const isEdit = Boolean(id);
   const navigate = useNavigate();
@@ -24,12 +26,12 @@ export default function ProfileFormPage() {
     }
 
     async function fetchProfile() {
-      if (isEdit && id) {
+      if (isEdit) {
         const data = await getProfileById(Number(id));
         setForm({
           name: data.name,
           description: data.description,
-          permissionIds: data.permissions.map((p: Permission) => p.id),
+          permissionIds: data.permissionIds,
         });
       }
     }
@@ -53,11 +55,23 @@ export default function ProfileFormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isEdit && id) {
-      await updateProfile(Number(id), form);
-    } else {
-      await createProfile(form);
+    setLoading(true);
+    setError(null);
+    try {
+      if (isEdit && id) {
+        await updateProfile(Number(id), form);
+      } else {
+        await createProfile(form);
+      }
+      navigate('/profiles');
+    } catch (err: any) {
+      setError(err.message || 'Erro ao salvar o perfil.');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleCancel = () => {
     navigate('/profiles');
   };
 
@@ -65,7 +79,7 @@ export default function ProfileFormPage() {
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">{isEdit ? 'Editar Perfil' : 'Novo Perfil'}</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4">
         <input
           name="name"
           value={form.name}
@@ -74,14 +88,14 @@ export default function ProfileFormPage() {
           className="p-2 border rounded"
           required
         />
-        <input
+        {/* <input
           name="description"
           value={form.description}
           onChange={handleChange}
           placeholder="Descrição"
           className="p-2 border rounded"
           required
-        />
+        /> */}
 
         <div>
           <label className="block font-semibold mb-2">Permissões</label>
@@ -98,11 +112,27 @@ export default function ProfileFormPage() {
             ))}
           </div>
         </div>
+        {error && <div className="text-red-600 font-semibold">{error}</div>}
+        <div className="flex gap-2 ml-auto">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={loading}
+            className="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          >
+            {loading ? 'Salvando...' : 'Salvar'}
+          </button>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="bg-gray-600 text-white px-4 py-2 rounded"
+          >
+            Cancelar
+          </button>
+        </div>
 
-        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-          Salvar
-        </button>
       </form>
+
     </div>
   );
 }

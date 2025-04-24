@@ -22,3 +22,8 @@ export const updateProfile = async (id: number, data: { name: string; descriptio
   const response = await api.put(`${basePrivate}/${baseFile}/${id}`, data);
   return response.data;
 };
+
+export async function deleteProfile(id: number) {
+  const response = await api.delete(`${basePrivate}/${baseFile}/${id}`);
+  return response.data;
+}

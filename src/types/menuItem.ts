@@ -159,7 +159,7 @@ export const MENU_ITEMS: MenuItem[] = [
         icon: 'BookOpen',
         permission: PERMISSIONS.SUBJECT.VIEW,
         children: [
-          { label: 'Listar Disciplinas', icon: 'List', path: '/subject', permission: PERMISSIONS.SUBJECT.VIEW },
+          { label: 'Listar Disciplinas', icon: 'List', path: '/subjects', permission: PERMISSIONS.SUBJECT.VIEW },
           { label: 'Nova Disciplina', icon: 'Plus', path: '/subject/new', permission: PERMISSIONS.SUBJECT.CREATE },
           { label: 'Disciplinas por Curso', icon: 'Link2', path: '/course-subjects', permission: PERMISSIONS.SUBJECT.MANAGE_COURSE_RELATIONS },
         ]

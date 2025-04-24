@@ -2,7 +2,7 @@
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import {login} from '../../api/auth';
+import {getPermissionsFromToken, login} from '../../api/auth';
 import { LoginCredentials } from '../../types/user';
 import userImage from '../../assets/images/do-utilizador.png';
 import logo from '../../assets/images/logo-vida-relevante.png';
@@ -24,10 +24,15 @@ export function LoginPage() {
     try {
       const credentials: LoginCredentials = { username, password };
       const { token, user } = await login(credentials);      
-      AuthContext.login(user, token);
-      navigate('/dashboard');
+      AuthContext.login(user, token);      
+      const perms = getPermissionsFromToken();
+      if (perms!= null && perms.permissionsByUnit.length > 1) {
+        navigate('/select-unit');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Erro ao fazer login');
+      setError(err.response?.data?.message || 'Erro ao fazer login');      
     }
   };
 
@@ -55,6 +60,12 @@ export function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
 
           <button onClick={handleLogin} className="login-button">Entrar</button>
         </div>

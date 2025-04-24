@@ -1,6 +1,7 @@
 import {jwtDecode} from 'jwt-decode';
 import api from './axios';
 import { LoginCredentials, LoginResponse } from '../types/user';
+import { UnitPermission } from '@/contexts/AuthContext';
 
 export async function login(credentials: LoginCredentials): Promise<LoginResponse> {
   const response = await api.post<LoginResponse>('/public/auth/login', credentials);
@@ -10,25 +11,28 @@ export async function login(credentials: LoginCredentials): Promise<LoginRespons
 
 
 export interface DecodedToken {
-  permissions: [{
-    id:number;
-    name:string;
-    description:string;
-  }];
+  username: string;
+  is_global_admin: false;
+  permissionsByUnit: UnitPermission[];  
+  // permissions: {
+  //   id: number;    
+  //   name: string;
+  //   description: string;
+  // }[];
   // outros campos: sub, exp, etc.
 }
 
-export function getPermissionsFromToken(token?: string): string[] {
+export function getPermissionsFromToken(token?: string): DecodedToken | null {
   if (!token) {
     token = localStorage.getItem('token') || '';
   }  
-  if (!token) return [];
+  if (!token) return null;
 
   try {
     const decoded = jwtDecode<DecodedToken>(token);
-    return decoded.permissions.map(p => p.name);
+    return decoded;
   } catch (error) {
     console.error('Erro ao decodificar token:', error);
-    return [];
+    return null;
   }
 }

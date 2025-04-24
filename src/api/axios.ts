@@ -8,11 +8,17 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
+  const unitId = localStorage.getItem('unitId');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  if (unitId) {
+    config.headers['X-Unit-Id'] = unitId;
+  }
   return config;
 });
+
+
 
 // 🎯 Mapeamento de mensagens padrão por status
 const defaultMessages: Record<number, string> = {
