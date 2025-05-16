@@ -4,13 +4,16 @@ import { Subject } from "@/types/subject";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function SubjectFormPage() {
+  const [status, setStatus] = useState(true);
   const [formData, setFormData] = useState<Partial<Subject>>({
     name: "",
     description: "",
     syllabus: "",
     course_hours: undefined,
+    isActive: true
   });
 
+  
   const navigate = useNavigate();
   const params = useParams();
   const isEditing = !!params?.id;
@@ -33,6 +36,7 @@ export default function SubjectFormPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    formData.isActive = status;
     if (isEditing) {
       await updateSubject(Number(params.id), formData);
     } else {
@@ -48,6 +52,11 @@ export default function SubjectFormPage() {
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+
+        <label className="flex items-center gap-2">
+        <input type="checkbox" checked={status} onChange={() => setStatus(!status)} />
+          Ativo
+        </label>
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
             Nome

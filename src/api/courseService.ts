@@ -25,12 +25,12 @@ export async function getCourseById(id: number) {
     return response.data;
 }
 
-export async function createCourse(payload: { name: string }) {
+export async function createCourse(payload: { name: string, description: string, subjectIds: number[] }) {
     const response = await api.post(`${basePrivate}/${baseCourse}`, payload);
     return response.data;
 }
 
-export async function updateCourse(id: number, payload: { name: string }) {
+export async function updateCourse(id: number, payload: { name: string, description: string, subjectIds: number[] }) {
     const response = await api.put(`${basePrivate}/${baseCourse}/${id}`, payload);
     return response.data;
 }

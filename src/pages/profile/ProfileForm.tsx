@@ -16,7 +16,7 @@ export default function ProfileFormPage() {
   const isEdit = Boolean(id);
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({ name: '', description: '', permissionIds: [] as number[] });
+  const [formulario, setFormulario] = useState({ name: '', description: '', permissionIds: [] as number[] });
   const [permissions, setPermissions] = useState<Permission[]>([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ProfileFormPage() {
     async function fetchProfile() {
       if (isEdit) {
         const data = await getProfileById(Number(id));
-        setForm({
+        setFormulario({
           name: data.name,
           description: data.description,
           permissionIds: data.permissionIds,
@@ -41,11 +41,11 @@ export default function ProfileFormPage() {
   }, [id, isEdit]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormulario((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handlePermissionToggle = (permissionId: number) => {
-    setForm((prev) => ({
+    setFormulario((prev) => ({
       ...prev,
       permissionIds: prev.permissionIds.includes(permissionId)
         ? prev.permissionIds.filter((id) => id !== permissionId)
@@ -59,9 +59,9 @@ export default function ProfileFormPage() {
     setError(null);
     try {
       if (isEdit && id) {
-        await updateProfile(Number(id), form);
+        await updateProfile(Number(id), formulario);
       } else {
-        await createProfile(form);
+        await createProfile(formulario);
       }
       navigate('/profiles');
     } catch (err: any) {
@@ -82,7 +82,7 @@ export default function ProfileFormPage() {
       <form className="flex flex-col gap-4">
         <input
           name="name"
-          value={form.name}
+          value={formulario.name}
           onChange={handleChange}
           placeholder="Nome do perfil"
           className="p-2 border rounded"
@@ -104,7 +104,7 @@ export default function ProfileFormPage() {
               <label key={perm.id} className="flex items-center gap-2">
                 <input
                   type="checkbox"
-                  checked={form.permissionIds.includes(perm.id)}
+                  checked={formulario.permissionIds.includes(perm.id)}
                   onChange={() => handlePermissionToggle(perm.id)}
                 />
                 {perm.description}
