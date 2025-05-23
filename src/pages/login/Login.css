@@ -1,0 +1,203 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 30vmin;
+    width: 65vmin;
+    pointer-events: none;
+}
+
+
+.App-header {
+    background-color: #262f74;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Login-area {
+    background-color: #1c6286;
+    opacity: 0.95;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.User-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+p {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.User,
+.Password {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    color: #000;
+}
+
+.User:focus,
+.Password:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.login-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: #ef8451;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+    background-color: #ed733a;
+}
+
+.login-button:active {
+    transform: scale(0.98);
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.error-message {
+    color: #e74c3c;
+    background-color: #fcecec;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border: 1px solid #e0b4b4;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Media Queries para Responsividade */
+
+/* Telas pequenas (dispositivos móveis) */
+@media (max-width: 480px) {
+    .Login-area {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .User-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .User,
+    .Password {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .login-button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+/* Telas médias (tablets) */
+@media (max-width: 768px) {
+    .Login-area {
+        width: 80%;
+        padding: 25px;
+    }
+
+    .User-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .User,
+    .Password {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .login-button {
+        padding: 14px;
+        font-size: 17px;
+    }
+
+    p {
+        font-size: 17px;
+    }
+}
+
+/* Telas grandes (desktops) */
+@media (min-width: 1024px) {
+    .Login-area {
+        width: 400px;
+        padding: 30px;
+    }
+
+    .User-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .User,
+    .Password {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .login-button {
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+}
+
