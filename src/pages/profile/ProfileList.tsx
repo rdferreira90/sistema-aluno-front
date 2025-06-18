@@ -13,8 +13,8 @@ interface Profile {
 }
 
 export default function ProfileListPage() {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);  
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);  
   const [profiles, setProfiles] = useState<Profile[]>([]);  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState('');

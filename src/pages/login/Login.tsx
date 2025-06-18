@@ -8,7 +8,7 @@ import userImage from '../../assets/images/do-utilizador.png';
 import logo from '../../assets/images/logo-vida-relevante.png';
 import { useAuth } from '@/contexts/AuthContext';
 
-export function LoginPage() {
+export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

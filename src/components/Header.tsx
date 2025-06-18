@@ -21,7 +21,7 @@ export function Header() {
   return (
     <header className="w-full bg-gray-100 px-6 py-4 shadow relative">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-semibold text-center">Sistema do Seminário</h1>
+        <h1 className="text-2xl font-semibold text-center">Sistema de Gestão Gnosis</h1>
       </div>
 
       <div className="absolute top-4 right-6">

@@ -1,17 +1,18 @@
+// import { getAllSubjects } from "@/api/subjectService";
 import { getAllSubjects } from "@/api/subjectService";
-import { Subject, SubjectsCardProps } from "@/types/subject";
+import {  Subject, SubjectsCardProps } from "@/types/subject";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
   export default function SubjectsPage() {
-    const [subjects, setSubjects] = useState<SubjectsCardProps[]>([]);
+    const [subjects, setSubjects] = useState<Subject[]>([]);
     const navigate = useNavigate();
   
     useEffect(() => {
       async function fetchData() {
         try {
           const data = await getAllSubjects();
-          // setSubjects(data);
+          setSubjects(data);
         } catch (error) {
           console.error('Erro ao buscar disciplinas:', error);
         }
@@ -33,7 +34,7 @@ import { useNavigate } from "react-router-dom";
             >
               <h3 className="text-lg font-semibold mb-2 text-blue-800">{subject.name}</h3>
               <p className="text-sm text-gray-600">
-                <strong>Professor:</strong> {subject.professor}
+                {/* <strong>Professor:</strong> {subject.professor} */}
               </p>
             </div>
           ))}
