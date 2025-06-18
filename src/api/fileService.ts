@@ -10,7 +10,7 @@ export async function getByCourseSubject(courseSubjectId: number): Promise<IFile
 }
 
 
-export async function downloadFile(fileId: number, fileName: string): Promise<any> {
+export async function downloadFile(fileId: number): Promise<any> {
     const response = await axios.get(`${basePrivate}/${baseFile}/download/${fileId}`, {
         responseType: 'blob',
     });

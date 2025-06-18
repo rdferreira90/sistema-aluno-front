@@ -1,8 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getSubjectById } from '../../api/subjectService';
-import { Subject, SubjectsCardProps } from '../../types/subject';
+import {  Subject, SubjectsCardProps } from '../../types/subject';
 import { getByCourseSubject, downloadFile, uploadFile } from '../../api/fileService';
 import { IFile } from '../../types/file';
 import { Download } from 'lucide-react';
@@ -10,11 +9,12 @@ import { FileUploader } from '../../components/FileUploader';
 import { useLoading } from '../../contexts/LoadingContext';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
+import { getSubjectById } from '@/api/subjectService';
 
 
 export default function SubjectDetailPage() {
     const { id } = useParams<{ id: string }>();
-    const [subject, setSubject] = useState<SubjectsCardProps | null>(null);
+    const [subject, setSubject] = useState<Subject | null>(null);
     const [files, setFiles] = useState<IFile[]>([]);
     const { showLoading, hideLoading } = useLoading();
     const { hasPermission } = useAuth();
@@ -24,7 +24,7 @@ export default function SubjectDetailPage() {
         async function fetchSubjectAndFiles() {
             if (id) {
                 const data = await getSubjectById(Number(id));
-                // setSubject(data);
+                setSubject(data);
 
                 const fileList = await getByCourseSubject(Number(id));
                 setFiles(fileList);
@@ -37,7 +37,7 @@ export default function SubjectDetailPage() {
     const handleDownload = async (fileId: number, fileName: string) => {
         try {
             showLoading();
-            const response = await downloadFile(fileId, fileName);
+            const response = await downloadFile(fileId);
             if (!response) throw toast.error('Erro ao buscar arquivo para download.');
 
             const url = window.URL.createObjectURL(new Blob([response]));
@@ -81,7 +81,7 @@ export default function SubjectDetailPage() {
         <div>
             <h2 className="text-2xl font-bold mb-4">{subject.name}</h2>
             <p className="text-gray-700 mb-2">
-                <strong>Professor:</strong> {subject.professor}
+                {/* <strong>Professor:</strong> {subject.professor} */}
             </p>
             {subject.description && (
                 <p className="text-gray-600">

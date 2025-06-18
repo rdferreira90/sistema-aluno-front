@@ -112,7 +112,7 @@ export default function DashboardPage() {
           >
             <h3 className="text-lg font-semibold mb-2 text-blue-800">{subject.name}</h3>
             <p className="text-sm text-gray-600">
-              <strong>Professor:</strong> {subject.professor}
+              {/* <strong>Professor:</strong> {subject.professor} */}
             </p>
           </div>
         ))}

@@ -1,4 +1,4 @@
-import { Subject, SubjectsCardProps } from '../types/subject';
+import { Subject } from '../types/subject';
 import api from './axios'; 
 
 const basePrivate = 'private'

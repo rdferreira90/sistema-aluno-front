@@ -138,7 +138,7 @@
 // }
 
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 import { ChevronDown, ChevronRight, Menu } from 'lucide-react';
 import { getLucideIcon } from '../utils/getLucideIcon';
 import { MenuItem } from '../types/menuItem';

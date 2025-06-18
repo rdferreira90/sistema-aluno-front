@@ -1,27 +1,35 @@
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LoginPage } from "../pages/login/Login";
-import DashboardPage from "../pages/dashboard/Dashboard";
+import { Suspense, lazy } from "react";
 import { ProtectedRoute } from "../components/ProtectedRoute";
 import { Layout } from "../layouts/Layout";
-import StudentsPage from "../pages/students/Student";
-import TeachersPage from "../pages/teacher/Teacher";
-import SubjectsPage from "../pages/subject/Subject";
-import SubjectDetailPage from '../pages/subject/SubjectDetail';
-import PermissionListPage from "@/pages/permissions/PermissionList";
-import PermissionFormPage from "@/pages/permissions/PermissionForm";
-import ProfileListPage from "@/pages/profile/ProfileList";
-import ProfileFormPage from "@/pages/profile/ProfileForm";
-import { SelectUnitPage } from "@/pages/login/SelectUnitPage";
-import UserListPage from "@/pages/user/UserList";
-import UserFormPage from "@/pages/user/UserForm";
-import SubjectListPage from "@/pages/subject/SubjectList";
-import SubjectFormPage from "@/pages/subject/SubjectForm";
-import CourseListPage from "@/pages/course/CourseList";
-import CourseFormPage from "@/pages/course/CourseForm";
+import { Spinner } from "@/components/ui/spinner";
+
+const LoginPage = lazy(() => import("../pages/login/Login"));
+const DashboardPage = lazy(() => import("../pages/dashboard/Dashboard"));
+const StudentsPage = lazy(() => import("../pages/students/Student"));
+const TeachersPage = lazy(() => import("../pages/teacher/Teacher"));
+const SubjectsPage = lazy(() => import("../pages/subject/Subject"));
+const SubjectDetailPage = lazy(() => import("../pages/subject/SubjectDetail"));
+const PermissionListPage = lazy(() => import("@/pages/permissions/PermissionList"));
+const PermissionFormPage = lazy(() => import("@/pages/permissions/PermissionForm"));
+const ProfileListPage = lazy(() => import("@/pages/profile/ProfileList"));
+const ProfileFormPage = lazy(() => import("@/pages/profile/ProfileForm"));
+const SelectUnitPage = lazy(() => import("@/pages/login/SelectUnitPage"));
+const UserListPage = lazy(() => import("@/pages/user/UserList"));
+const UserFormPage = lazy(() => import("@/pages/user/UserForm"));
+const SubjectListPage = lazy(() => import("@/pages/subject/SubjectList"));
+const SubjectFormPage = lazy(() => import("@/pages/subject/SubjectForm"));
+const CourseListPage = lazy(() => import("@/pages/course/CourseList"));
+const CourseFormPage = lazy(() => import("@/pages/course/CourseForm"));
+const ClassAssignmentListPage = lazy(() => import("@/pages/class/ClassAssignmentList"));
+const ClassAssignmentFormPage = lazy(() => import("@/pages/class/ClassAssignmentForm"));
+
 
 export function AppRoutes() {
   return (
     <Router>
+      <Suspense fallback={<Spinner />}>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -48,9 +56,13 @@ export function AppRoutes() {
             <Route path="/course" element={<CourseListPage />} />
             <Route path="/course/new" element={<CourseFormPage />} />
             <Route path="/course/:id" element={<CourseFormPage />} />
+            <Route path="/class-assignment" element={<ClassAssignmentListPage />} />
+            <Route path="/class-assignment/new" element={<ClassAssignmentFormPage />} />
+            <Route path="/class-assignment/:id" element={<ClassAssignmentFormPage />} />
           </Route>
         </Route>
       </Routes>
+      </Suspense>
     </Router>
   );
 }

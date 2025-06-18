@@ -49,7 +49,7 @@ import { useEffect, useState } from 'react';
 import logo from '../../assets/images/logo-vida-relevante.png';
 import userImage from '../../assets/images/do-utilizador.png';
 
-export function SelectUnitPage() {
+export default function SelectUnitPage() {
   const { userUnits, selectUnit } = useAuth();
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState<number | null>(null);
