@@ -32,6 +32,11 @@ export async function getSubjectById(id: number): Promise<Subject> {
   // return Promise.resolve(data)
 }
 
+export async function getSubjectsByCourseId(id: number): Promise<any> {
+  const response = await api.get<Subject>(`${basePrivate}/${baseSubject}/get-by-course/${id}`);
+  return response.data;
+}
+
 export const deleteSubject = async (id: number): Promise<any> => {
   const response = await api.delete(`${basePrivate}/${baseSubject}/${id}`);
   return response.data;

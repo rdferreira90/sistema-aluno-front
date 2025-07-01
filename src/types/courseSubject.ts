@@ -1,4 +1,4 @@
-interface Course {
+interface CourseSubject {
     id: number;
     name: string;
   }
